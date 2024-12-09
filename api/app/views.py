@@ -58,8 +58,8 @@ def fun4(req,d):
     elif req.method=='DELETE':
         demo.delete()
         return HttpResponse('deleted')
-    
-@csrf_exempt
+
+@api_view(['GET','POST'])    
 def fun5(req):
     if req.method=='GET':
         d=Project_user.objects.all()
