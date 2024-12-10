@@ -136,20 +136,21 @@ class fun8(APIView):
         except Project_user.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
-# class genericapiview(generics.GenericAPIView,mixins.ListModelMixin,mixins.CreateModelMixim):
-#     serializer_class=Model_serializer
-#     queryset=Project_user.objects.all()
-#     def get(self,req):
-#         return self.list(req)
-#     def post(self,req):
-#         return self.create(req)
+class genericapiview(generics.GenericAPIView,mixins.ListModelMixin,mixins.CreateModelMixin):
+    serializer_class=Model_serializer
+    queryset=Project_user.objects.all()
+    def get(self,req):
+        return self.list(req)
+    def post(self,req):
+        return self.create(req)
     
-# class update(generics.GenericAPIView,mixins.RetrieveModelMixin,mixins.UpdateModelMixin,mixins.DestroyModelMixin):
-#     serializer_class=Model_serializer
-#     queryset=Project_user.objects.all()
-#     def get(self,req,id=None):
-#         return self.retrieve(req)
-#     def put(self,req,id=None):
-#         return self.update(req,id)
-#     def delete(self,req,id=None):
-#         return self.destroy(req,id)
+class update(generics.GenericAPIView,mixins.RetrieveModelMixin,mixins.UpdateModelMixin,mixins.DestroyModelMixin):
+    serializer_class=Model_serializer
+    queryset=Project_user.objects.all()
+    lookup_field='id'
+    def get(self,req,id=None):
+        return self.retrieve(req)
+    def put(self,req,id=None):
+        return self.update(req,id)
+    def delete(self,req,id):
+        return self.destroy(req,id)
